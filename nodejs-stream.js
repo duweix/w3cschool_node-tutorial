@@ -52,6 +52,7 @@ console.log("程序执行完毕");
 */
 
 // ============================================================ 管道流
+/*
 var fs = require("fs");
 
 var readerStream = fs.createReadStream("input.txt");
@@ -61,6 +62,30 @@ var writerStream = fs.createWriteStream("output.txt");
 readerStream.pipe(writerStream);
 
 console.log("程序执行完毕");
+*/
+
+// ============================================================ 链式流
+/*
+var fs = require("fs");
+var zlib = require("zlib");
+
+fs.createReadStream("input.txt")
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream("input.txt.gz"));
+  
+console.log("程序压缩完成");
+*/
+
+var fs = require("fs");
+var zlib = require("zlib");
+
+fs.createReadStream("input.txt.gz")
+  .pipe(zlib.createGunzip())
+  .pipe(fs.createWriteStream("input.txt"));
+  
+console.log("文件解压完成");
+
+
 
 
 
